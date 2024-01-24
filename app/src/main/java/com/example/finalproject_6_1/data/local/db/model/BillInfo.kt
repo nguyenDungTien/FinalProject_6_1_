@@ -9,10 +9,10 @@ import androidx.room.PrimaryKey
 data class BillInfo(
 
     @PrimaryKey(autoGenerate = true)
-    var id: Long?,
+    var id: Long?=null,
 
-    @ColumnInfo(name = "group_user")
-    var groupUser: String?,
+//    @ColumnInfo(name = "group_user")
+//    var groupUser: String?,
 
 //    @ColumnInfo(name = "group")
 //    var group: Long?,
@@ -35,16 +35,16 @@ data class BillInfo(
     @ColumnInfo(name = "money_type")
     var moneyType: String?,
 
-    @ColumnInfo(name = "invoice_form")
-    var billForm: String?,
+//    @ColumnInfo(name = "invoice_form")
+//    var billForm: String?,
 
 //    @ColumnInfo(name = "invoice_form_print")
 //    var originalTemplateCode: String?,
 
 //    @ColumnInfo(name = "invoice_symbol")
 //    var billSymbol: String?,
-    @ColumnInfo(name = "tax_code")
-    var taxCode: String?,
+//    @ColumnInfo(name = "tax_code")
+//    var taxCode: String?,
 
     @ColumnInfo(name = "date")
     var date: String?,

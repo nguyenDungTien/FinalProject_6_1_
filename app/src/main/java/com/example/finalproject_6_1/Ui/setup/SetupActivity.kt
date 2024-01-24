@@ -23,9 +23,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject_6_1.R
 import com.example.finalproject_6_1.Ui.adapter.ItemDialogBottomSheetAdapter
 import com.example.finalproject_6_1.Ui.bill_list.BillListActivity
+import com.example.finalproject_6_1.data.local.db.AppDatabase
 import com.example.finalproject_6_1.data.local.db.model.BillDetail
 import com.example.finalproject_6_1.data.local.db.model.BillInfo
 import com.example.finalproject_6_1.data.local.db.model.CustomerInfo
+import com.example.finalproject_6_1.data.local.db.model.QrCodeInfo
 import com.example.finalproject_6_1.databinding.ActivityHomeAdminBinding
 import com.example.finalproject_6_1.databinding.FragmentSetupInfoBinding
 import com.example.finalproject_6_1.utils.UtilDate
@@ -39,6 +41,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.roundToLong
@@ -67,6 +70,7 @@ class SetupActivity : AppCompatActivity() {
     private var calendarStartTimeQR: Calendar? = null
     private var calendarExpiryDateQR: Calendar? = null
     private var isExistTypeTicket = false
+    private var isDisQrCode = false
     private var mSecond: Int = 0
     private val  listItemBottomSheet =  ArrayList<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -317,15 +321,9 @@ class SetupActivity : AppCompatActivity() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
             override fun afterTextChanged(p0: Editable?) {
-                try {
-                    setTextAuto(TAX_CHANGE)
-//                    checkInputObligatory()
-                    customerInfoEdit?.apply {
-                        taxCode = p0.toString().trim()
-                    }
-                } catch (e: java.lang.Exception) {
-                    cleanMoney()
-//                    checkInputObligatory()
+                setTextAuto(TAX_CHANGE)
+                billDetailEdit?.apply {
+                    tax = p0.toString().trim()
                 }
             }
         })
@@ -409,6 +407,7 @@ class SetupActivity : AppCompatActivity() {
             }
         })
         binding.blockBillDetail.edtPercentTax.addTextChangedListener {
+            setTextAuto(TAX_CHANGE)
             billDetailEdit?.apply {
                 tax = it.toString().trim()
             }
@@ -591,31 +590,32 @@ class SetupActivity : AppCompatActivity() {
 //    }
 
     private fun cleanInputQrCode() {
-//        calendarStartTimeQR = Calendar.getInstance()
-//        calendarExpiryDateQR = Calendar.getInstance()
-//        calendarExpiryDateQR!!.add(Calendar.DATE, 1)
-//        calendar = Calendar.getInstance()
+        calendarStartTimeQR = Calendar.getInstance()
+        calendarExpiryDateQR = Calendar.getInstance()
+        calendarExpiryDateQR!!.add(Calendar.DATE, 1)
+        calendar = Calendar.getInstance()
+
+        calendarStartTimeQR!!.set(
+            calendar!!.get(Calendar.YEAR),
+            calendar!!.get(Calendar.MONTH),
+            calendar!!.get(Calendar.DAY_OF_MONTH),
+            calendar!!.get(Calendar.HOUR_OF_DAY),
+            calendar!!.get(Calendar.MINUTE),
+            0
+        )
 //
-//        calendarStartTimeQR!!.set(
-//            calendar!!.get(Calendar.YEAR),
-//            calendar!!.get(Calendar.MONTH),
-//            calendar!!.get(Calendar.DAY_OF_MONTH),
-//            calendar!!.get(Calendar.HOUR_OF_DAY),
-//            calendar!!.get(Calendar.MINUTE),
-//            0
-//        )
-//
-//        val blQrCode = getViewDataBinding().blockQrCode
-//        blQrCode.edtTimeScan.setText("1")
+        val blQrCode = binding.blockQrCode
+        blQrCode.edtTimeScan.setText("1")
 //        blQrCode.edtTimeScan.hideIconClear(true)
 //        blQrCode.edtTimeScan.focusError(false)
-//        blQrCode.txtStartTimeV1.text = UtilDate.setUpDateFromCalendar(calendarStartTimeQR!!, ::setDate, ::setTime)
-//        blQrCode.txtExpiryDateV1.text = ""
-//        blQrCode.imgClearExpiryDate.visibility = View.GONE
-//        blQrCode.edtExpiryNumber.setText("")
+        blQrCode.txtStartTimeV1.text = UtilDate.setUpDateFromCalendar(calendarStartTimeQR!!, ::setDate, ::setTime)
+        blQrCode.txtExpiryDateV1.text = ""
+        blQrCode.imgClearExpiryDate.visibility = View.GONE
+        blQrCode.edtExpiryNumber.setText("")
     }
 
     private fun isDisableViewQrCode(b: Boolean) {
+        isDisQrCode = b
         binding.blockQrCode.edtTimeScan.isEnabled = !b
         binding.blockQrCode.txtStartTimeV1.isEnabled = !b
         binding.blockQrCode.txtExpiryDateV1.isEnabled = !b
@@ -742,7 +742,9 @@ class SetupActivity : AppCompatActivity() {
             showBottomSheet(list)
         }
         binding.btnCreateSetup.setOnClickListener {
-            createSetup()
+            CoroutineScope(Dispatchers.Main).launch {
+                createSetup()
+            }
         }
         binding.btnBack.setOnClickListener {
             showUnsavedDataAlertDialog()
@@ -849,7 +851,57 @@ class SetupActivity : AppCompatActivity() {
         alertDialog.show()
     }
 
-    private fun createSetup() {
+    private suspend fun createSetup() {
+        val buyerNotGetTicket = if (binding.blockInfoUser.cbGetBill.isChecked){ 1 }else{ 0 }
+        val customerInfo = if (buyerNotGetTicket == 1){
+            CustomerInfo(buyNotReciver = true, name = "", address = "", legalName = "", phoneNumber = "", email = "")
+        }else{
+            CustomerInfo(
+                buyNotReciver = false,
+                name = binding.blockInfoUser.edtBuyer.toString(),
+                address = binding.blockInfoUser.edtAddress.toString(),
+                legalName = binding.blockInfoUser.edtUnitName.toString(),
+                phoneNumber = binding.blockInfoUser.edtPhoneNumber.toString(),
+                email = binding.blockInfoUser.edtEmail.toString()
+            )
+        }
+        val billInfo = BillInfo(
+            nameCompany = binding.blockBillInfor.edtNameCompany.toString(),
+            address = binding.blockBillInfor.txtAddress.toString(),
+            paymentType = binding.blockBillInfor.txtPayments.toString(),
+            moneyType =  binding.blockBillInfor.txtMonney.toString(),
+            date = binding.blockBillInfor.txtDate.toString()
+        )
+        val hasQRCode = if (isDisQrCode){ 0 }else{ 1 }
+        val qrCodeInfo = if (hasQRCode == 1){
+            QrCodeInfo(
+                isCreate = true,
+                totalQrcode = binding.blockQrCode.edtTimeScan.text.toString().trim(),
+                startDateQrcode = UtilDate.convertDateTimeToString(calendarStartTimeQR!!.time, UtilDate.TIME_ISO_8601),
+                endDateQrcode = UtilDate.convertDateTimeToString(calendarExpiryDateQR!!.time, UtilDate.TIME_ISO_8601)
+            )
+        } else{
+            QrCodeInfo(isCreate = false,totalQrcode="",startDateQrcode="",endDateQrcode="")
+        }
+        val billDetail = BillDetail(
+            property= binding.blockBillDetail.txtProperty.toString(),
+            merchandise = binding.blockBillDetail.edtMerchandise.toString(),
+            typeTicket = binding.blockBillDetail.edtTypeTicket.toString(),
+            calcUnit = binding.blockBillDetail.edtCalcUnit.toString(),
+            amount = binding.blockBillDetail.edtAmount.toString(),
+            priceUnit = binding.blockBillDetail.edtPriceUnit.toString(),
+            tax = binding.blockBillDetail.edtPercentTax.toString(),
+            taxMoney = binding.blockBillDetail.edtTaxMoney.toString(),
+            totalMoneyAfterTax = binding.blockBillDetail.edtMoneyAfterTax.toString()
+
+        )
+        withContext(Dispatchers.IO) {
+            AppDatabase.getDatabase(this@SetupActivity).customerInfoDao().insert(customerInfo)
+            AppDatabase.getDatabase(this@SetupActivity).billInfoDao().insert(billInfo)
+            AppDatabase.getDatabase(this@SetupActivity).qrCodeInfoDao().insert(qrCodeInfo)
+            AppDatabase.getDatabase(this@SetupActivity).billDetailDao().insert(billDetail)
+        }
+
 
     }
 

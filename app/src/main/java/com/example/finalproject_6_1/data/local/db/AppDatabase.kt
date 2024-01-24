@@ -8,9 +8,14 @@ import com.example.finalproject_6_1.data.local.db.dao.BillDetailDao
 import com.example.finalproject_6_1.data.local.db.dao.BillInfoDao
 import com.example.finalproject_6_1.data.local.db.dao.CustomerInfoDao
 import com.example.finalproject_6_1.data.local.db.dao.QrCodeInfoDao
+import com.example.finalproject_6_1.data.local.db.model.BillDetail
 import com.example.finalproject_6_1.data.local.db.model.BillInfo
+import com.example.finalproject_6_1.data.local.db.model.CustomerInfo
+import com.example.finalproject_6_1.data.local.db.model.QrCodeInfo
 
-@Database(entities = [BillInfo::class], version = 1, exportSchema = false)
+@Database(entities = [
+    CustomerInfo::class, BillDetail::class, BillInfo::class,
+    QrCodeInfo::class,], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {

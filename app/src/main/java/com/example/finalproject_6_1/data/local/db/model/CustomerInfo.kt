@@ -8,8 +8,8 @@ data class CustomerInfo(
     @PrimaryKey(autoGenerate = true)
     val id: Long? = null,
 
-    @ColumnInfo(name = "group_user")
-    var groupUser: String?,
+//    @ColumnInfo(name = "group_user")
+//    var groupUser: String?,
 
     @ColumnInfo(name = "buy_not_receive")
     var buyNotReciver: Boolean?,
@@ -20,8 +20,8 @@ data class CustomerInfo(
 //    @ColumnInfo(name = "buyer_code")
 //    var buyerCode: String?,
 
-    @ColumnInfo(name = "buyer_birthDay")
-    var buyerBirthDay: String?,
+//    @ColumnInfo(name = "buyer_birthDay")
+//    var buyerBirthDay: String?,
 
     @ColumnInfo(name = "address")
     var address: String?,
@@ -29,11 +29,11 @@ data class CustomerInfo(
     @ColumnInfo(name = "legal_name")
     var legalName: String?,
 
-    @ColumnInfo(name = "tax_code")
-    var taxCode: String?,
+//    @ColumnInfo(name = "tax_code")
+//    var taxCode: String?,
 
-    @ColumnInfo(name = "postal_code")
-    var postalCode: String?,
+//    @ColumnInfo(name = "postal_code")
+//    var postalCode: String?,
 
     @ColumnInfo(name = "phone_number")
     var phoneNumber: String?,

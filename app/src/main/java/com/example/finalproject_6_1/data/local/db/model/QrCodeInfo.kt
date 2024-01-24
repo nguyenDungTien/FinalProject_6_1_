@@ -8,13 +8,13 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "QR_CODE_INFO")
 data class QrCodeInfo(
     @PrimaryKey(autoGenerate = true)
-    var id: Long?,
+    var id: Long?=null,
 
-    @ColumnInfo(name = "group_user")
-    var groupUser: String?,
-
-    @ColumnInfo(name = "group")
-    var group: Long?,
+//    @ColumnInfo(name = "group_user")
+//    var groupUser: String?,
+//
+//    @ColumnInfo(name = "group")
+//    var group: Long?,
 
     @ColumnInfo(name = "is_create")
     var isCreate: Boolean?,

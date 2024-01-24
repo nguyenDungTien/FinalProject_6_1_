@@ -9,13 +9,13 @@ import androidx.room.PrimaryKey
 
 data class BillDetail(
     @PrimaryKey(autoGenerate = true)
-    var id: Long?,
+    var id: Long?=null,
 
-    @ColumnInfo(name = "group_user")
-    var groupUser: String?,
-
-    @ColumnInfo(name = "group")
-    var group: Long?,
+//    @ColumnInfo(name = "group_user")
+//    var groupUser: String?,
+//
+//    @ColumnInfo(name = "group")
+//    var group: Long?,
 
     @ColumnInfo(name = "property")
     var property: String?,
@@ -23,8 +23,8 @@ data class BillDetail(
     @ColumnInfo(name = "merchandise")
     var merchandise: String?,
 
-    @ColumnInfo(name = "code_merchandise")
-    var codeMerchandise: String?,
+//    @ColumnInfo(name = "code_merchandise")
+//    var codeMerchandise: String?,
 
     @ColumnInfo(name = "type_ticket")
     var typeTicket: String?,
