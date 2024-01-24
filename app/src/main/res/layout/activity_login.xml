@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Ui.Login.LoginActivity">
+
+        <ImageView
+            android:id="@+id/img_logo_login"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/ticket_logo" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:layout_below="@id/img_logo_login"
+            android:layout_centerHorizontal="true"
+            android:textSize="32sp"
+            android:fontFamily="@font/roboto_bold"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/img_logo_login"
+            android:layout_marginTop="50dp"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:orientation="vertical"
+                android:paddingBottom="32dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="@string/account"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/edt_email_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/border"
+                    android:paddingStart="8dp"
+                    android:maxLines="1"
+                    android:textSize="16sp"
+                    android:freezesText="true"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="@string/password"
+                    android:textSize="16sp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:passwordToggleEnabled="true"
+                        app:passwordToggleTint="@color/color_A1A8B0"
+                        app:boxBackgroundMode="none">
+                        <EditText
+                            android:id="@+id/edt_password_log"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:background="@drawable/border"
+                            android:inputType="textPassword"
+                            app:passwordToggleEnabled="true"
+                            android:paddingStart="8dp"
+                            android:maxLines="1"
+                            android:paddingRight="32dp"
+                            android:textSize="16sp"
+                            android:freezesText="true"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <ImageView
+                        android:id="@+id/reg_img_clear_confirm_pass"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginEnd="40dp"
+                        android:layout_marginBottom="12dp"
+                        android:src="@drawable/close_x"
+                        android:visibility="gone"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="22dp"/>
+
+
+
+                </RelativeLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_btn"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="@string/login"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_forgot_password"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/forgot_password"
+                    android:textSize="16sp"
+                    android:layout_gravity="right"
+                    android:padding="8dp"
+                    android:fontFamily="@font/roboto_regular"/>
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </RelativeLayout>
+
+</layout>

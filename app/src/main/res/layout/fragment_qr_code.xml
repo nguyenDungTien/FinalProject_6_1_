@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/bg_bgcolor_ffffff_radius_8dp_shadowbottom_12dp"
+    android:paddingStart="22dp"
+    tools:ignore="RtlSymmetry"
+    android:clickable="true"
+    android:focusableInTouchMode="true">
+
+    <RelativeLayout
+        android:id="@+id/rl_block_qrCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:text="@string/Setup_QR_code"
+            android:textColor="@color/blue"
+            android:textSize="16sp"
+            app:setStyleText="Roboto_Regular"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageView
+            android:id="@+id/img_drop_down_qr_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:paddingTop="9dp"
+            android:src="@drawable/ic_drop_down"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/llGroupSetUpTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="14dp"
+        android:orientation="vertical"
+        android:paddingBottom="16dp"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/rl_block_qrCode"
+        app:layout_constraintStart_toStartOf="@+id/rl_block_qrCode"
+        app:layout_constraintTop_toBottomOf="@+id/rl_block_qrCode"
+        tools:ignore="DisableBaselineAlignment">
+
+        <RelativeLayout
+            android:id="@+id/rl_cb_create_qr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="6dp">
+
+            <CheckBox
+                android:id="@+id/cb_create_qr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:button="@drawable/ic_check_box"
+                android:checked="false"
+                android:filterTouchesWhenObscured="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless" />
+
+            <TextView
+                android:id="@+id/txtCreateQr"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="24dp"
+                android:layout_toEndOf="@+id/cb_create_qr"
+                android:gravity="center_vertical"
+                android:text="@string/create_QR"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:setStyleText="Roboto_Regular" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txtTimeScan"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
+            android:text="@string/Number_of_scans_allowed"
+            android:textColor="@color/black"
+            app:setStyleText="Roboto_Regular" />
+
+        <EditText
+            android:id="@+id/edtTimeScan"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_four_border"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="10"
+            android:paddingStart="11dp"
+            android:paddingEnd="8dp"
+            android:textSize="14sp" />
+
+        <EditText
+            android:id="@+id/txtErrorTimeScan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:text="@string/over_99"
+            android:textColor="@color/color_EE0033"
+            android:visibility="gone"
+            app:setStyleText="Roboto_Regular" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtStartTime"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:text="@string/effective_time"
+                android:textColor="@color/black"
+                app:setStyleText="Roboto_Regular" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@string/todo_bat_buoc"
+                android:textColor="@color/color_EE0033"
+                android:textSize="14sp"
+                app:setStyleText="Roboto_Regular" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtStartTimeV1"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_four_border"
+            android:drawableEnd="@drawable/ic_calendar_blue"
+            android:gravity="center_vertical"
+            android:hint="@string/lua_chon"
+            android:inputType="text"
+            android:paddingStart="11dp"
+            android:paddingEnd="13dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:setStyleText="Roboto_Regular" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/llTxtExpiryDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtExpiryDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/time_expires"
+                    android:textColor="@color/black"
+                    app:setStyleText="Roboto_Regular" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:text="@string/todo_bat_buoc"
+                    android:textColor="@color/color_EE0033"
+                    android:textSize="14sp"
+                    app:setStyleText="Roboto_Regular" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtExpiryDateV1"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@+id/llTxtExpiryDate"
+                android:background="@drawable/bg_four_border"
+                android:drawableEnd="@drawable/ic_calendar_blue"
+                android:gravity="center_vertical"
+                android:hint="@string/lua_chon"
+                android:inputType="text"
+                android:paddingStart="11dp"
+                android:paddingEnd="13dp"
+                android:textColor="@color/blue"
+                android:textSize="14sp"
+                app:setStyleText="Roboto_Regular" />
+
+            <ImageView
+                android:id="@+id/imgClearExpiryDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/txtExpiryDateV1"
+                android:layout_alignEnd="@+id/txtExpiryDateV1"
+                android:layout_alignBottom="@+id/txtExpiryDateV1"
+                android:layout_marginEnd="48dp"
+                android:src="@drawable/close_x"
+                android:visibility="gone"
+                tools:ignore="ContentDescription" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtExpiryNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:text="Số ngày hiệu lực"
+                android:textColor="@color/black"
+                app:setStyleText="Roboto_Regular" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@string/todo_bat_buoc"
+                android:textColor="@color/color_EE0033"
+                android:textSize="14sp"
+                app:setStyleText="Roboto_Regular" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edtExpiryNumber"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_four_border"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:maxLength="3"
+            android:paddingStart="11dp"
+            android:paddingEnd="8dp"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:background="@drawable/bg_bgcolor_ffffff_radius_8dp_shadowbottom_12dp"
+    android:paddingStart="22dp"
+    tools:ignore="RtlSymmetry">
+
+    <RelativeLayout
+        android:id="@+id/rl_block_info_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:text="@string/customer_information"
+            android:textColor="@color/blue"
+            android:textSize="16sp"
+            app:setStyleText="Roboto_Regular"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageView
+            android:id="@+id/img_drop_down_info_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:paddingTop="9dp"
+            android:src="@drawable/ic_drop_down"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_group_info_user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="14dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/rl_block_info_user"
+        app:layout_constraintStart_toStartOf="@+id/rl_block_info_user"
+        app:layout_constraintTop_toBottomOf="@+id/rl_block_info_user"
+        tools:ignore="DisableBaselineAlignment">
+
+        <RelativeLayout
+            android:id="@+id/rl_get_bill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="6dp">
+
+            <CheckBox
+                android:id="@+id/cb_get_bill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:button="@drawable/ic_check_box"
+                android:checked="true"
+                android:filterTouchesWhenObscured="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless" />
+
+            <TextView
+                android:id="@+id/txtGetBill"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="24dp"
+                android:layout_toEndOf="@+id/cb_get_bill"
+                android:gravity="center_vertical"
+                android:text="@string/buyer_does_not_receive_invoice"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:setStyleText="Roboto_Regular" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:text="@string/name_customer"
+                android:textColor="@color/black"
+                app:setStyleText="Roboto_Regular" />
+
+            <TextView
+                android:id="@+id/txtBuyerRed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@string/todo_bat_buoc"
+                android:textColor="@color/color_EE0033"
+                android:textSize="14sp"
+                app:setStyleText="Roboto_Regular" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edt_buyer"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_four_border"
+            android:imeOptions="actionNext"
+            android:inputType="textPersonName"
+            android:maxLength="100"
+            android:nextFocusDown="@id/edt_address"
+            android:paddingStart="11dp"
+            android:paddingEnd="8dp"
+            android:textSize="14sp" />
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="6dp"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txt_code_buyer"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:text="@string/tax_code_customer"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    app:setStyleText="Roboto_Regular" />-->
+
+<!--                <EditText-->
+<!--                    android:id="@+id/edt_code_buyer"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:layout_below="@+id/txt_code_buyer"-->
+<!--                    android:background="@drawable/bg_four_border"-->
+<!--                    android:imeOptions="actionNext"-->
+<!--                    android:inputType="text"-->
+<!--                    android:maxLength="50"-->
+<!--                    android:paddingStart="11dp"-->
+<!--                    android:textSize="14sp" />-->
+<!--                &lt;!&ndash;                android:nextFocusDown="@id/edt_contract_number"&ndash;&gt;-->
+<!--            </RelativeLayout>-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="9dp"-->
+<!--                android:layout_weight="1">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/txt_birthday"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:text="@string/date_of_birth"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    app:setStyleText="Roboto_Regular" />-->
+
+<!--                <EditText-->
+<!--                    android:id="@+id/txt_birthday_v1"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:layout_below="@+id/txt_birthday"-->
+<!--                    android:background="@drawable/bg_four_border"-->
+<!--                    android:drawableEnd="@drawable/ic_calendar_blue"-->
+<!--                    android:gravity="center_vertical"-->
+<!--                    android:hint="@string/lua_chon"-->
+<!--                    android:inputType="text"-->
+<!--                    android:paddingStart="11dp"-->
+<!--                    android:paddingEnd="13dp"-->
+<!--                    android:textColor="@color/black"-->
+<!--                    android:textSize="14sp"-->
+<!--                    app:setStyleText="Roboto_Regular" />-->
+<!--            </RelativeLayout>-->
+<!--        </LinearLayout>-->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:gravity="center_vertical"
+                android:text="@string/address"
+                android:textColor="@color/black"
+                app:setStyleText="Roboto_Regular" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@string/todo_bat_buoc"
+                android:textColor="@color/color_EE0033"
+                android:textSize="14sp"
+                app:setStyleText="Roboto_Regular" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edt_address"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_four_border"
+            android:imeOptions="actionNext"
+            android:inputType="textPersonName"
+            android:maxLength="400"
+            android:nextFocusDown="@id/edt_unit_name"
+            android:paddingStart="11dp"
+            android:paddingEnd="8dp"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:gravity="center_vertical"
+                android:text="Tên đơn vị"
+                android:textColor="@color/black"
+                app:setStyleText="Roboto_Regular" />
+
+            <TextView
+                android:id="@+id/txtUnitNameRed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@string/todo_bat_buoc"
+                android:textColor="@color/color_EE0033"
+                android:textSize="14sp"
+                app:setStyleText="Roboto_Regular" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edt_unit_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_four_border"
+            android:imeOptions="actionNext"
+            android:inputType="textPersonName"
+            android:maxLength="400"
+            android:paddingStart="11dp"
+            android:paddingEnd="8dp"
+            android:textSize="14sp" />
+        <!--        android:nextFocusDown="@id/edt_tax_code"-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="9dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/txt_phone_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/phone_number"
+                    android:textColor="@color/black"
+                    app:setStyleText="Roboto_Regular" />
+
+                <EditText
+                    android:id="@+id/edt_phone_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/txt_phone_number"
+                    android:background="@drawable/bg_four_border"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="20"
+                    android:paddingStart="11dp"
+                    android:paddingEnd="8dp"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="9dp"
+                android:layout_marginBottom="16dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/txt_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/email"
+                    android:textColor="@color/black"
+                    app:setStyleText="Roboto_Regular" />
+
+                <EditText
+                    android:id="@+id/edt_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/txt_email"
+                    android:background="@drawable/bg_four_border"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="50"
+                    android:paddingStart="11dp"
+                    android:paddingEnd="8dp"
+                    android:textSize="14sp" />
+                <!--                android:nextFocusDown="@id/txt_type_page"-->
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

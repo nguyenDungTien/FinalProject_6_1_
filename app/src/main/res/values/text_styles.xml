@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="roboto_bold">0</integer>
+    <integer name="roboto_italic">1</integer>
+    <integer name="roboto_regular">2</integer>
+    <integer name="roboto_medium">3</integer>
+    <integer name="sf_pro_text_bold">4</integer>
+    <integer name="sf_pro_text_bold_italic">5</integer>
+    <integer name="sf_pro_text_medium">6</integer>
+    <integer name="sf_pro_text_medium_italic">7</integer>
+    <integer name="sf_pro_text_regular">8</integer>
+    <integer name="sf_pro_text_regular_italic">9</integer>
+    <integer name="sf_pro_text_semi_bold">10</integer>
+    <integer name="sf_pro_text_semi_bold_italic">11</integer>
+
+</resources>

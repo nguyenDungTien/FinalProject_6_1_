@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="UITextView">
+        <attr name="setStyleText" format="integer">
+            <enum name="Roboto_Bold" value="0" />
+            <enum name="Roboto_Italic" value="1" />
+            <enum name="Roboto_Regular" value="2" />
+            <enum name="Roboto_Medium" value="3" />
+            <enum name="sf_pro_text_bold" value="4"/>
+            <enum name="sf_pro_text_bold_italic" value="5"/>
+            <enum name="sf_pro_text_medium" value="6" />
+            <enum name="sf_pro_text_medium_italic" value="7" />
+            <enum name="sf_pro_text_regular" value="8" />
+            <enum name="sf_pro_text_regular_italic" value="9" />
+            <enum name="sf_pro_text_semi_bold" value="10" />
+            <enum name="sf_pro_text_semi_bold_italic" value="11" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="UITextField">
+        <attr name="setbackgrourdtransparent">
+            <enum name="transparent" value="1"/>
+            <enum name="white" value="2"/>
+            <enum name="solidWhiteNoBorder" value="3"/>
+            <enum name="fourConnerBorder" value="4"/>
+            <enum name="green" value="5"/>
+        </attr>
+        <attr name="setStyleTextField" format="integer">
+            <enum name="Roboto_Bold" value="0" />
+            <enum name="Roboto_Italic" value="1" />
+            <enum name="Roboto_Regular" value="2" />
+            <enum name="Roboto_Medium" value="3" />
+            <enum name="sf_pro_text_bold" value="4"/>
+            <enum name="sf_pro_text_bold_italic" value="5"/>
+            <enum name="sf_pro_text_medium" value="6" />
+            <enum name="sf_pro_text_medium_italic" value="7" />
+            <enum name="sf_pro_text_regular" value="8" />
+            <enum name="sf_pro_text_regular_italic" value="9" />
+            <enum name="sf_pro_text_semi_bold" value="10" />
+            <enum name="sf_pro_text_semi_bold_italic" value="11" />
+        </attr>
+        <attr name="ui_icon_clear" format="reference" />
+        <attr name="positionClearButton">
+            <enum name="middleEnd" value="1"/>
+            <enum name="topEnd" value="2"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="CustomToolbar">
+        <attr name="isShowButtonLeft" format="boolean"/>
+        <attr name="isShowButtonRight" format="boolean"/>
+        <attr name="isShowTextRight" format="boolean"/>
+        <attr name="hideViewMarginTop" format="boolean"/>
+        <attr name="buttonBackIcon" format="reference"/>
+        <attr name="buttonRightIcon" format="reference"/>
+        <attr name="titleText" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="UIButtonStyle">
+        <attr name="btn_icon" format="reference" />
+        <attr name="btn_text" format="string"/>
+        <attr name="setTextColor" format="color" />
+        <attr name="setIconMarginStart" format="dimension" />
+        <attr name="setTextMarginStart" format="dimension" />
+        <attr name="setStyleButtonText" format="integer">
+            <enum name="Roboto_Bold" value="0" />
+            <enum name="Roboto_Italic" value="1" />
+            <enum name="Roboto_Regular" value="2" />
+            <enum name="Roboto_Medium" value="3" />
+            <enum name="sf_pro_text_bold" value="4"/>
+            <enum name="sf_pro_text_bold_italic" value="5"/>
+            <enum name="sf_pro_text_medium" value="6" />
+            <enum name="sf_pro_text_medium_italic" value="7" />
+            <enum name="sf_pro_text_regular" value="8" />
+            <enum name="sf_pro_text_regular_italic" value="9" />
+            <enum name="sf_pro_text_semi_bold" value="10" />
+            <enum name="sf_pro_text_semi_bold_italic" value="11" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="SwipeRevealLayout">
+        <attr name="dragEdge">
+            <flag name="left" value="1"/>
+            <flag name="right" value="2"/>
+            <flag name="top" value="4"/>
+            <flag name="bottom" value="8"/>
+        </attr>
+        <attr name="mode">
+            <enum name="normal" value="0"/>
+            <enum name="same_level" value="1"/></attr>
+        <attr name="flingVelocity" format="integer"/>
+        <attr name="minDistRequestDisallowParent" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="PickerUI">
+        <!-- to use in PickerUI in the panel -->
+        <attr name="backgroundColor" format="color" />
+        <attr name="linesCenterColor" format="color" />
+
+        <!-- to use in PickerUIListView -->
+        <attr name="autoDismiss" format="boolean" />
+        <attr name="itemsClickables" format="boolean" />
+        <attr name="entries" format="reference" />
+
+        <!-- to use in PickerUI in the PickerUIListView by PickerUIAdapter -->
+        <attr name="textCenterColor" format="color" />
+        <attr name="textNoCenterColor" format="color" />
+
+        <!-- Blur Attributes -->
+        <attr name="blur" format="boolean" />
+        <attr name="blur_downScaleFactor" format="float" />
+        <attr name="blur_FilterColor" format="color" />
+        <attr name="blur_radius" format="integer" />
+        <attr name="blur_use_renderscript" format="boolean" />
+
+    </declare-styleable>
+</resources>

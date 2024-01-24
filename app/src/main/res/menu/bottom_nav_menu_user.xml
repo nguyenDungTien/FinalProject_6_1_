@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/history"
+        android:icon="@drawable/ic_history"
+        android:id="@+id/history"/>
+    <item android:title="@string/released"
+        android:icon="@drawable/ic_release"
+        android:id="@+id/released"/>
+    <item android:title="@string/scan_QR"
+        android:icon="@drawable/ic_scan"
+        android:id="@+id/scanQR"/>
+    <item android:title="@string/report"
+        android:icon="@drawable/ic_report"
+        android:id="@+id/report"/>
+    <item android:title="@string/account"
+        android:icon="@drawable/ic_account"
+        android:id="@+id/account"/>
+</menu>

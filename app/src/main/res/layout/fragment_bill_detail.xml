@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bgcolor_ffffff_radius_8dp_shadowbottom_12dp"
+    android:paddingStart="22dp"
+    tools:ignore="RtlSymmetry">
+    <RelativeLayout
+        android:id="@+id/rl_block_detail_bill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnusedAttribute">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:text="@string/detail"
+            android:textColor="@color/blue"
+            android:textSize="16sp"
+            app:setStyleText="Roboto_Regular"
+            tools:ignore="RelativeOverlap" />
+
+        <ImageView
+            android:id="@+id/img_bill_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:paddingTop="9dp"
+            android:src="@drawable/ic_drop_down"
+            tools:ignore="ContentDescription" />
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/ll_group_detail_bill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_block_detail_bill"
+        android:layout_marginEnd="14dp"
+        android:orientation="vertical"
+        android:paddingBottom="18dp"
+        android:visibility="visible"
+        tools:ignore="RtlSymmetry">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:text="@string/Nature"
+                android:textColor="@color/black"
+                app:setStyleText="Roboto_Regular" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@string/todo_bat_buoc"
+                android:textColor="@color/color_EE0033"
+                android:textSize="14sp"
+                app:setStyleText="Roboto_Regular" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/txt_property"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_bgcolor_f3f3f3_radius_4dp"
+            android:enabled="false"
+            android:gravity="center_vertical"
+            android:paddingStart="11dp"
+            android:paddingEnd="13dp"
+            android:text="@string/Goods"
+            android:textColor="@color/black"
+            app:setStyleText="Roboto_Regular"
+            android:textSize="14sp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:text="@string/Goods"
+                android:textColor="@color/black"
+                app:setStyleText="Roboto_Regular" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@string/todo_bat_buoc"
+                android:textColor="@color/color_EE0033"
+                android:textSize="14sp"
+                app:setStyleText="Roboto_Regular" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edt_merchandise"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLength="200"
+            android:nextFocusDown="@id/edt_address"
+            android:paddingStart="11dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:background="@drawable/bg_four_border"
+            app:setStyleTextField="Roboto_Regular" />
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:text="@string/commodity_codes"-->
+<!--            android:textColor="@color/black"-->
+<!--            app:setStyleText="Roboto_Regular" />-->
+
+<!--        <EditText-->
+<!--            android:id="@+id/edt_code_merchandise"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:imeOptions="actionNext"-->
+<!--            android:inputType="text"-->
+<!--            android:maxLength="50"-->
+<!--            android:nextFocusDown="@id/edt_address"-->
+<!--            android:paddingStart="11dp"-->
+<!--            android:paddingEnd="8dp"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="14sp"-->
+<!--            app:setStyleTextField="Roboto_Regular"-->
+<!--            android:background="@drawable/bg_four_border"/>-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:text="@string/invoice_type"
+                android:textColor="@color/black"
+                app:setStyleText="Roboto_Regular" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@string/todo_bat_buoc"
+                android:textColor="@color/color_EE0033"
+                android:textSize="14sp"
+                app:setStyleText="Roboto_Regular" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edt_type_ticket"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLength="200"
+            android:nextFocusDown="@id/edt_address"
+            android:paddingStart="11dp"
+            android:paddingEnd="8dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:setStyleTextField="Roboto_Regular"
+            android:background="@drawable/bg_four_border"/>
+        <TextView
+            android:id="@+id/txt_exsit_type_ticket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="5dp"
+            android:text="@string/exsit_type_ticket"
+            android:textColor="@color/color_EE0033"
+            app:setStyleText="Roboto_Regular"
+            android:visibility="gone"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:text="@string/Unit"
+                android:textColor="@color/black"
+                app:setStyleText="Roboto_Regular" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@string/todo_bat_buoc"
+                android:textColor="@color/color_EE0033"
+                android:textSize="14sp"
+                app:setStyleText="Roboto_Regular" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edt_calc_unit"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:imeOptions="actionNext"
+            android:maxLength="10"
+            android:inputType="textPersonName"
+            android:paddingStart="11dp"
+            android:paddingEnd="8dp"
+            android:textSize="14sp"
+            android:background="@drawable/bg_four_border"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:text="@string/unit_price"
+                android:textColor="@color/black"
+                app:setStyleText="Roboto_Regular" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@string/todo_bat_buoc"
+                android:textColor="@color/color_EE0033"
+                android:textSize="14sp"
+                app:setStyleText="Roboto_Regular" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edt_money_after_tax"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:inputType="number"
+            android:paddingEnd="8dp"
+            android:gravity="center_vertical"
+            android:paddingStart="11dp"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:setStyleTextField="Roboto_Regular"
+            android:background="@drawable/bg_four_border"/>
+        <TextView
+            android:id="@+id/txt_money_after_tax"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:setStyleText="Roboto_Italic"
+            android:text="@string/invoice_price" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_tax"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+<!--            <TextView-->
+<!--                android:id="@+id/txt_tax"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:text="@string/tax"-->
+<!--                android:textColor="@color/black"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:setStyleText="Roboto_Regular" />-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="3dp"-->
+<!--                android:text="@string/todo_bat_buoc"-->
+<!--                android:textColor="@color/color_EE0033"-->
+<!--                android:textSize="14sp"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/txt_tax"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/txt_tax"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/txt_tax"-->
+<!--                app:setStyleText="Roboto_Regular" />-->
+            <!--nếu phần tử "khác" không nằm ở cuối, hàm edtTax.onCLick sẽ lỗi-->
+<!--            <EditText-->
+<!--                android:id="@+id/edt_tax"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:background="@drawable/bg_four_border"-->
+<!--                android:drawableEnd="@drawable/ic_drop_down_in_edt"-->
+<!--                android:gravity="center_vertical"-->
+<!--                android:hint="@string/lua_chon"-->
+<!--                android:imeOptions="actionNext"-->
+<!--                android:inputType="text"-->
+<!--                android:paddingStart="11dp"-->
+<!--                android:paddingEnd="11dp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="14sp"-->
+<!--                app:layout_constraintEnd_toStartOf="@+id/view_space"-->
+<!--                app:layout_constraintStart_toStartOf="@+id/txt_tax"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/txt_tax"-->
+<!--                app:setStyleText="Roboto_Regular" />-->
+<!--            <View-->
+<!--                android:id="@+id/view_space"-->
+<!--                android:layout_width="9dp"-->
+<!--                android:layout_height="80dp"-->
+<!--                android:visibility="visible"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_input_tax"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/txt_tax_v1"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/Enter_taxes"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:setStyleText="Roboto_Regular" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:text="@string/todo_bat_buoc"
+                    android:textColor="@color/color_EE0033"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/txt_tax_v1"
+                    app:layout_constraintStart_toEndOf="@+id/txt_tax_v1"
+                    app:layout_constraintTop_toTopOf="@+id/txt_tax_v1" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txt_tax_v1">
+
+                    <EditText
+                        android:id="@+id/edt_percent_tax"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:imeOptions="actionDone"
+                        android:maxLength="7"
+                        android:inputType="number"
+                        android:paddingStart="11dp"
+                        android:paddingEnd="35dp"
+                        android:textSize="14sp"
+                        android:background="@drawable/bg_four_border"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="13dp"
+                        android:text="@string/percent"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:setStyleText="Roboto_Regular" />
+                </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_ver"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.45" />
+
+            <TextView
+                android:id="@+id/txt_type_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:text="@string/quantity_per_print"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setStyleText="Roboto_Regular" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@string/todo_bat_buoc"
+                android:textColor="@color/color_EE0033"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txt_type_pay"
+                app:layout_constraintStart_toEndOf="@+id/txt_type_pay"
+                app:layout_constraintTop_toTopOf="@+id/txt_type_pay"
+                app:setStyleText="Roboto_Regular" />
+
+            <EditText
+                android:id="@+id/edt_amount"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="9dp"
+                android:gravity="center_vertical"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="7"
+                android:maxLines="1"
+                android:paddingStart="11dp"
+                android:paddingEnd="8dp"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/gl_ver"
+                app:layout_constraintStart_toStartOf="@+id/txt_type_pay"
+                app:layout_constraintTop_toBottomOf="@+id/txt_type_pay"
+                android:background="@drawable/bg_four_border"/>
+
+            <TextView
+                android:id="@+id/txt_type_monny"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginStart="9dp"
+                android:gravity="center_vertical"
+                android:text="@string/unit_price_without_VAT"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toEndOf="@+id/gl_ver"
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:setStyleText="Roboto_Regular" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@string/todo_bat_buoc"
+                android:textColor="@color/color_EE0033"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/txt_type_monny"
+                app:layout_constraintStart_toEndOf="@+id/txt_type_monny"
+                app:layout_constraintTop_toTopOf="@+id/txt_type_monny"
+                app:setStyleText="Roboto_Regular" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/edt_price_unit"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_bgcolor_f3f3f3_radius_4dp"
+                android:gravity="center_vertical"
+                android:paddingStart="11dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/black"
+                app:fontFamily="@font/roboto_regular"
+                android:textSize="14sp"
+                android:maxLines="1"
+                app:autoSizeTextType="uniform"
+                app:autoSizeMinTextSize="6dp"
+                app:autoSizeMaxTextSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/txt_type_monny"
+                app:layout_constraintTop_toBottomOf="@+id/txt_type_monny" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/ll_tax"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/txt_tax_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/tax_price"
+                    android:textColor="@color/black"
+                    app:setStyleText="Roboto_Regular" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:text="@string/todo_bat_buoc"
+                    android:textColor="@color/color_EE0033"
+                    android:textSize="14sp"
+                    app:setStyleText="Roboto_Regular" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <EditText
+                android:background="@drawable/bg_four_border"
+                android:id="@+id/edt_tax_money"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:paddingEnd="8dp"
+                android:paddingStart="11dp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:setStyleTextField="Roboto_Regular" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="default_title_indicator_line_position">0</integer>
+    <integer name="default_title_indicator_footer_indicator_style">2</integer>
+    <!-- Max & min blur values -->
+    <integer name="blur_radius_min">1</integer>
+    <integer name="blur_downscale_min">1</integer>
+
+    <!-- Animations -->
+    <integer name="animation_time">400</integer>
+
+    <!--    tooltip-->
+    <integer name="anim_duration_information">250</integer>
+</resources>
