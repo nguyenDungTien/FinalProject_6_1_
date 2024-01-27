@@ -73,6 +73,7 @@ class SetupActivity : AppCompatActivity() {
     private var isDisQrCode = false
     private var mSecond: Int = 0
     private val  listItemBottomSheet =  ArrayList<String>()
+    private var listBillInfo =  ArrayList<BillInfo>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentSetupInfoBinding.inflate(layoutInflater)
@@ -129,7 +130,7 @@ class SetupActivity : AppCompatActivity() {
                 isDisableViewInfoUser(false)
             }
             customerInfoEdit?.apply {
-                buyNotReciver = isChecked
+                buyNotReceiver = isChecked
             }
         }
         binding.blockInfoUser.edtBuyer.addTextChangedListener(object : TextWatcher {
@@ -679,7 +680,7 @@ class SetupActivity : AppCompatActivity() {
             override fun onItemClick(selectedItem: String) {
                 val newText = Editable.Factory.getInstance().newEditable(selectedItem)
                 binding.blockBillInfor.txtPayments.text = newText
-                binding.blockBillInfor.txtPayments.setSelection(newText.length)
+//                binding.blockBillInfor.txtPayments.setSelection(newText.length)
                 dialog.dismiss()
             }
         })
@@ -854,10 +855,10 @@ class SetupActivity : AppCompatActivity() {
     private suspend fun createSetup() {
         val buyerNotGetTicket = if (binding.blockInfoUser.cbGetBill.isChecked){ 1 }else{ 0 }
         val customerInfo = if (buyerNotGetTicket == 1){
-            CustomerInfo(buyNotReciver = true, name = "", address = "", legalName = "", phoneNumber = "", email = "")
+            CustomerInfo(buyNotReceiver = true, name = "", address = "", legalName = "", phoneNumber = "", email = "")
         }else{
             CustomerInfo(
-                buyNotReciver = false,
+                buyNotReceiver = false,
                 name = binding.blockInfoUser.edtBuyer.toString(),
                 address = binding.blockInfoUser.edtAddress.toString(),
                 legalName = binding.blockInfoUser.edtUnitName.toString(),
@@ -892,14 +893,15 @@ class SetupActivity : AppCompatActivity() {
             priceUnit = binding.blockBillDetail.edtPriceUnit.toString(),
             tax = binding.blockBillDetail.edtPercentTax.toString(),
             taxMoney = binding.blockBillDetail.edtTaxMoney.toString(),
-            totalMoneyAfterTax = binding.blockBillDetail.edtMoneyAfterTax.toString()
+            totalMoneyAfterTax = binding.blockBillDetail.edtMoneyAfterTax.toString(),
+            quantityPerPrint = binding.blockBillDetail.edtAmount.toString()
 
         )
         withContext(Dispatchers.IO) {
-            AppDatabase.getDatabase(this@SetupActivity).customerInfoDao().insert(customerInfo)
-            AppDatabase.getDatabase(this@SetupActivity).billInfoDao().insert(billInfo)
-            AppDatabase.getDatabase(this@SetupActivity).qrCodeInfoDao().insert(qrCodeInfo)
-            AppDatabase.getDatabase(this@SetupActivity).billDetailDao().insert(billDetail)
+//            AppDatabase.getDatabase(this@SetupActivity).customerInfoDao().getAllCustomerInfo(customerInfo)
+//            listBillInfo = AppDatabase.getDatabase(this@SetupActivity).billInfoDao().getAllBillInfo(billInfo)
+            AppDatabase.getDatabase(this@SetupActivity).qrCodeInfoDao().insertQrCodeInfo(qrCodeInfo)
+            AppDatabase.getDatabase(this@SetupActivity).billDetailDao().insertBillDetail(billDetail)
         }
 
 

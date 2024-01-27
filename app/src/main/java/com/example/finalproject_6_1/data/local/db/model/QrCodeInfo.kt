@@ -7,8 +7,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "QR_CODE_INFO")
 data class QrCodeInfo(
-    @PrimaryKey(autoGenerate = true)
-    var id: Long?=null,
 
 //    @ColumnInfo(name = "group_user")
 //    var groupUser: String?,
@@ -27,6 +25,9 @@ data class QrCodeInfo(
 
     @ColumnInfo(name = "end_date_qrcode")
     var endDateQrcode: String?,
-    @Ignore
-    var isUpdateQrInfo:Boolean =  false
-)
+//    @Ignore
+//    var isUpdateQrInfo:Boolean =  false
+){
+    @PrimaryKey(autoGenerate = true)
+    var id: Long = 0
+}

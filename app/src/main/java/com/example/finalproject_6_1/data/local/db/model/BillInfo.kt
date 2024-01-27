@@ -8,8 +8,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "BILL_INFO")
 data class BillInfo(
 
-    @PrimaryKey(autoGenerate = true)
-    var id: Long?=null,
+
 
 //    @ColumnInfo(name = "group_user")
 //    var groupUser: String?,
@@ -48,4 +47,7 @@ data class BillInfo(
 
     @ColumnInfo(name = "date")
     var date: String?,
-)
+){
+    @PrimaryKey(autoGenerate = true)
+    var id: Long = 0
+}

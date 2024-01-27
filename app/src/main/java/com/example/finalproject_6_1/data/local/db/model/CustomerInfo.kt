@@ -5,14 +5,13 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 @Entity(tableName = "CUSTOMER_INFO")
 data class CustomerInfo(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long? = null,
+
 
 //    @ColumnInfo(name = "group_user")
 //    var groupUser: String?,
 
     @ColumnInfo(name = "buy_not_receive")
-    var buyNotReciver: Boolean?,
+    var buyNotReceiver: Boolean?,
 
     @ColumnInfo(name = "name")
     var name: String?,
@@ -52,4 +51,7 @@ data class CustomerInfo(
 //
 //    @ColumnInfo(name = "bank_account")
 //    var bankAccount: String?
-)
+){
+    @PrimaryKey(autoGenerate = true)
+    var id: Long = 0
+}

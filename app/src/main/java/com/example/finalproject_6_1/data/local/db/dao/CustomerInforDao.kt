@@ -7,7 +7,7 @@ import com.example.finalproject_6_1.data.local.db.model.CustomerInfo
 interface CustomerInfoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(customerInfo: CustomerInfo): Long
+    fun insertCustomerInfo(customerInfo: CustomerInfo)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(customerInfo: CustomerInfo): Int
@@ -15,8 +15,8 @@ interface CustomerInfoDao {
     @Delete
     suspend fun delete(customerInfo: CustomerInfo): Int
 
-    @Query("SELECT * FROM CUSTOMER_INFO")
-    fun getAllCustomerInfo(): List<CustomerInfo>
+    @Query("SELECT * FROM CUSTOMER_INFO ORDER BY id DESC")
+    fun getAllCustomerInfo(): ArrayList<CustomerInfo>
 
     @Query("SELECT * FROM CUSTOMER_INFO WHERE name = :name")
     fun getCustomerInfoByName(name: String): CustomerInfo

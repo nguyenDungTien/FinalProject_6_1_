@@ -8,8 +8,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "BILL_DETAIL")
 
 data class BillDetail(
-    @PrimaryKey(autoGenerate = true)
-    var id: Long?=null,
+
 
 //    @ColumnInfo(name = "group_user")
 //    var groupUser: String?,
@@ -47,9 +46,15 @@ data class BillDetail(
     @ColumnInfo(name = "total_money_after_tax")
     var totalMoneyAfterTax: String?,
 
+    @ColumnInfo(name = "quantity_per_print")
+    var quantityPerPrint: String?
+
 //    @ColumnInfo(name = "has_code")
 //    var hasCode: Int = 0,
 
 //    @Ignore
 //    var isUpdateDetailBill :Boolean = false
-)
+){
+    @PrimaryKey(autoGenerate = true)
+    var id: Long = 0
+}

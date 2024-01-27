@@ -7,7 +7,7 @@ import com.example.finalproject_6_1.data.local.db.model.BillInfo
 interface BillInfoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(billInfo: BillInfo) : Long
+    fun insertBillInfo(billInfo: BillInfo)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(billInfo: BillInfo): Int
@@ -15,8 +15,8 @@ interface BillInfoDao {
     @Delete
     suspend fun delete(billInfo: BillInfo): Int
 
-    @Query("SELECT * FROM BILL_INFO")
-    fun getAllBillInfo(): List<BillInfo>
+    @Query("SELECT * FROM BILL_INFO ORDER BY id DESC")
+    fun getAllBillInfo(): ArrayList<BillInfo>
 
 
 

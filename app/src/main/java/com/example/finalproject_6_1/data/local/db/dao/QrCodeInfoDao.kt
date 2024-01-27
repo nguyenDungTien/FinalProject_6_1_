@@ -7,7 +7,7 @@ import com.example.finalproject_6_1.data.local.db.model.QrCodeInfo
 interface QrCodeInfoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(qrCodeInfo: QrCodeInfo) : Long
+    fun insertQrCodeInfo(qrCodeInfo: QrCodeInfo)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(qrCodeInfo: QrCodeInfo): Int
@@ -15,8 +15,8 @@ interface QrCodeInfoDao {
     @Delete
     suspend fun delete(qrCodeInfo: QrCodeInfo): Int
 
-    @Query("SELECT * FROM QR_CODE_INFO")
-    fun getQrCodeWithUser(): List<QrCodeInfo>
+    @Query("SELECT * FROM QR_CODE_INFO ORDER BY id DESC")
+    fun getAllQrCode(): ArrayList<QrCodeInfo>
 
     @Query("DELETE FROM QR_CODE_INFO")
     suspend fun deleteQrCode(): Int
