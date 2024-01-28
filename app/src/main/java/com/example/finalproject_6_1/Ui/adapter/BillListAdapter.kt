@@ -5,24 +5,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.finalproject_6_1.Ui.setup.BillListModel
 import com.example.finalproject_6_1.data.local.db.`interface`.ItemBillList
+import com.example.finalproject_6_1.data.local.db.model.InvoiceInfoModel
 import com.example.finalproject_6_1.databinding.ItemBillBinding
 
-class BillListAdapter(val listBill:ArrayList<BillListModel>, val itemBillList:ItemBillList):RecyclerView.Adapter<BillListAdapter.BillListViewHolder>() {
+class BillListAdapter(val listBill:ArrayList<InvoiceInfoModel>, val itemBillList:ItemBillList):RecyclerView.Adapter<BillListAdapter.BillListViewHolder>() {
     inner class BillListViewHolder(val binding: ItemBillBinding):RecyclerView.ViewHolder(binding.root){
-        fun bind(billListModel: BillListModel){
+        fun bind(invoiceInfoModel: InvoiceInfoModel){
             binding.apply {
-                tvNameCompany.text = billListModel.billInfor?.nameCompany
-                tvNameGoods.text = billListModel.billDetails?.merchandise
-                tvTypeInvoice.text = billListModel.billDetails?.typeTicket
-                tvUnitPrice.text = billListModel.billDetails?.priceUnit
+                tvNameCompany.text = invoiceInfoModel.nameCompany
+                tvNameGoods.text = invoiceInfoModel.merchandise
+                tvTypeInvoice.text = invoiceInfoModel.typeTicket
+                tvUnitPrice.text = invoiceInfoModel.priceUnit
                 tvPreviewInvoice.setOnClickListener {
-                    itemBillList.item(billListModel,"Preview")
+                    itemBillList.item(invoiceInfoModel,"Preview")
                 }
                 tvFixInvoice.setOnClickListener {
-                    itemBillList.item(billListModel,"Fix")
+                    itemBillList.item(invoiceInfoModel,"Fix")
                 }
                 tvDeleteInvoice.setOnClickListener {
-                    itemBillList.item(billListModel,"Delete")
+                    itemBillList.item(invoiceInfoModel,"Delete")
                 }
 
             }
@@ -37,8 +38,8 @@ class BillListAdapter(val listBill:ArrayList<BillListModel>, val itemBillList:It
     }
 
     override fun onBindViewHolder(holder: BillListViewHolder, position: Int) {
-        val billListModel = listBill[position]
-        holder.bind(billListModel)
+        val invoiceInfoModel = listBill[position]
+        holder.bind(invoiceInfoModel)
     }
 
     override fun getItemCount(): Int {

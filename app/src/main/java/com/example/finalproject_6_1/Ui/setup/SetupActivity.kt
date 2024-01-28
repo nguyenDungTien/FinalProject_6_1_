@@ -24,10 +24,7 @@ import com.example.finalproject_6_1.R
 import com.example.finalproject_6_1.Ui.adapter.ItemDialogBottomSheetAdapter
 import com.example.finalproject_6_1.Ui.bill_list.BillListActivity
 import com.example.finalproject_6_1.data.local.db.AppDatabase
-import com.example.finalproject_6_1.data.local.db.model.BillDetail
-import com.example.finalproject_6_1.data.local.db.model.BillInfo
-import com.example.finalproject_6_1.data.local.db.model.CustomerInfo
-import com.example.finalproject_6_1.data.local.db.model.QrCodeInfo
+import com.example.finalproject_6_1.data.local.db.model.*
 import com.example.finalproject_6_1.databinding.ActivityHomeAdminBinding
 import com.example.finalproject_6_1.databinding.FragmentSetupInfoBinding
 import com.example.finalproject_6_1.utils.UtilDate
@@ -743,9 +740,7 @@ class SetupActivity : AppCompatActivity() {
             showBottomSheet(list)
         }
         binding.btnCreateSetup.setOnClickListener {
-            CoroutineScope(Dispatchers.Main).launch {
-                createSetup()
-            }
+            createSetup()
         }
         binding.btnBack.setOnClickListener {
             showUnsavedDataAlertDialog()
@@ -852,59 +847,127 @@ class SetupActivity : AppCompatActivity() {
         alertDialog.show()
     }
 
-    private suspend fun createSetup() {
-        val buyerNotGetTicket = if (binding.blockInfoUser.cbGetBill.isChecked){ 1 }else{ 0 }
-        val customerInfo = if (buyerNotGetTicket == 1){
-            CustomerInfo(buyNotReceiver = true, name = "", address = "", legalName = "", phoneNumber = "", email = "")
-        }else{
-            CustomerInfo(
-                buyNotReceiver = false,
-                name = binding.blockInfoUser.edtBuyer.toString(),
-                address = binding.blockInfoUser.edtAddress.toString(),
-                legalName = binding.blockInfoUser.edtUnitName.toString(),
-                phoneNumber = binding.blockInfoUser.edtPhoneNumber.toString(),
-                email = binding.blockInfoUser.edtEmail.toString()
-            )
-        }
-        val billInfo = BillInfo(
-            nameCompany = binding.blockBillInfor.edtNameCompany.toString(),
-            address = binding.blockBillInfor.txtAddress.toString(),
-            paymentType = binding.blockBillInfor.txtPayments.toString(),
-            moneyType =  binding.blockBillInfor.txtMonney.toString(),
-            date = binding.blockBillInfor.txtDate.toString()
-        )
-        val hasQRCode = if (isDisQrCode){ 0 }else{ 1 }
-        val qrCodeInfo = if (hasQRCode == 1){
-            QrCodeInfo(
-                isCreate = true,
-                totalQrcode = binding.blockQrCode.edtTimeScan.text.toString().trim(),
-                startDateQrcode = UtilDate.convertDateTimeToString(calendarStartTimeQR!!.time, UtilDate.TIME_ISO_8601),
-                endDateQrcode = UtilDate.convertDateTimeToString(calendarExpiryDateQR!!.time, UtilDate.TIME_ISO_8601)
-            )
-        } else{
-            QrCodeInfo(isCreate = false,totalQrcode="",startDateQrcode="",endDateQrcode="")
-        }
-        val billDetail = BillDetail(
-            property= binding.blockBillDetail.txtProperty.toString(),
-            merchandise = binding.blockBillDetail.edtMerchandise.toString(),
-            typeTicket = binding.blockBillDetail.edtTypeTicket.toString(),
-            calcUnit = binding.blockBillDetail.edtCalcUnit.toString(),
-            amount = binding.blockBillDetail.edtAmount.toString(),
-            priceUnit = binding.blockBillDetail.edtPriceUnit.toString(),
-            tax = binding.blockBillDetail.edtPercentTax.toString(),
-            taxMoney = binding.blockBillDetail.edtTaxMoney.toString(),
-            totalMoneyAfterTax = binding.blockBillDetail.edtMoneyAfterTax.toString(),
-            quantityPerPrint = binding.blockBillDetail.edtAmount.toString()
+    private fun createSetup() {
+        binding.apply {
+            val typeTicket = binding.blockBillDetail.edtTypeTicket.text.toString()
+            val existingTypeTicket = AppDatabase(this@SetupActivity).invoiceInfoDao().isTypeTicketExists(typeTicket)
 
-        )
-        withContext(Dispatchers.IO) {
-//            AppDatabase.getDatabase(this@SetupActivity).customerInfoDao().getAllCustomerInfo(customerInfo)
-//            listBillInfo = AppDatabase.getDatabase(this@SetupActivity).billInfoDao().getAllBillInfo(billInfo)
-            AppDatabase.getDatabase(this@SetupActivity).qrCodeInfoDao().insertQrCodeInfo(qrCodeInfo)
-            AppDatabase.getDatabase(this@SetupActivity).billDetailDao().insertBillDetail(billDetail)
+            if (existingTypeTicket) {
+                // Show a toast message indicating that the typeTicket already exists
+                Toast.makeText(this@SetupActivity, "TypeTicket already exists", Toast.LENGTH_SHORT).show()
+            } else {
+
+                val buyerNotGetTicket = if (binding.blockInfoUser.cbGetBill.isChecked) {
+                    1
+                } else {
+                    0
+                }
+
+                val buyNotReceiver: Boolean
+                val name: String
+                val address: String
+                val legalName: String
+                val phoneNumber: String
+                val email: String
+
+                if (buyerNotGetTicket == 1) {
+                    buyNotReceiver = true
+                    name = ""
+                    address = ""
+                    legalName = ""
+                    phoneNumber = ""
+                    email = ""
+                } else {
+                    buyNotReceiver = false
+                    name = binding.blockInfoUser.edtBuyer.text.toString()
+                    address = binding.blockInfoUser.edtAddress.text.toString()
+                    legalName = binding.blockInfoUser.edtUnitName.text.toString()
+                    phoneNumber = binding.blockInfoUser.edtPhoneNumber.text.toString()
+                    email = binding.blockInfoUser.edtEmail.text.toString()
+                }
+                val nameCompany = binding.blockBillInfor.edtNameCompany.text.toString()
+                val addressCompany = binding.blockBillInfor.txtAddress.text.toString()
+                val paymentType = binding.blockBillInfor.txtPayments.text.toString()
+                val moneyType = binding.blockBillInfor.txtMonney.text.toString()
+                val date = binding.blockBillInfor.txtDate.text.toString()
+                val hasQRCode = if (isDisQrCode) 0 else 1
+                val isCreate :Boolean
+                val totalQrcode :String
+                val startDateQrcode :String?
+                val endDateQrcode :String?
+                if (hasQRCode == 1) {
+                    isCreate = true
+                    totalQrcode = binding.blockQrCode.edtTimeScan.text.toString().trim()
+                    startDateQrcode = UtilDate.convertDateTimeToString(calendarStartTimeQR!!.time, UtilDate.TIME_ISO_8601)
+                    endDateQrcode = UtilDate.convertDateTimeToString(calendarExpiryDateQR!!.time, UtilDate.TIME_ISO_8601)
+                } else {
+                    isCreate = false
+                    totalQrcode = ""
+                    startDateQrcode = ""
+                    endDateQrcode = ""
+                }
+
+                val property = binding.blockBillDetail.txtProperty.text.toString()
+                val merchandise = binding.blockBillDetail.edtMerchandise.text.toString()
+                val calcUnit = binding.blockBillDetail.edtCalcUnit.text.toString()
+                val amount = binding.blockBillDetail.edtAmount.text.toString()
+                val priceUnit = binding.blockBillDetail.edtPriceUnit.text.toString()
+                val tax = binding.blockBillDetail.edtPercentTax.text.toString()
+                val taxMoney = binding.blockBillDetail.edtTaxMoney.text.toString()
+                val totalMoneyAfterTax = binding.blockBillDetail.edtMoneyAfterTax.text.toString()
+                val quantityPerPrint = binding.blockBillDetail.edtAmount.text.toString()
+
+                val invoiceInfoModel = InvoiceInfoModel(
+                    nameCompany,
+                    addressCompany,
+                    paymentType,
+                    moneyType,
+                    date,
+                    buyNotReceiver,
+                    name,
+                    address,
+                    legalName,
+                    phoneNumber,
+                    email,
+                    property,
+                    merchandise,
+                    typeTicket,
+                    calcUnit,
+                    amount,
+                    priceUnit,
+                    tax,
+                    taxMoney,
+                    totalMoneyAfterTax,
+                    quantityPerPrint,
+                    isCreate,
+                    totalQrcode,
+                    startDateQrcode,
+                    endDateQrcode
+                )
+                AppDatabase(this@SetupActivity).invoiceInfoDao().insertInvoiceInfo(invoiceInfoModel)
+
+                // Optionally, show a success message
+                showSuccessDialog()
+            }
+
         }
 
 
+    }
+
+    private fun showSuccessDialog() {
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle("Thành công")
+            .setMessage("Hóa đơn đã được thêm thành công.")
+            .setPositiveButton("OK") { _, _ ->
+                // Chuyển sang BillListActivity khi nhấn OK
+                val intent = Intent(this@SetupActivity, BillListActivity::class.java)
+                startActivity(intent)
+                finish() // Để ngăn ngừa quay lại SetupActivity khi nhấn nút Back từ BillListActivity
+            }
+            .create()
+
+        alertDialog.show()
     }
 
     private fun cleanEdtInputData(parentLayout: ViewGroup) {
@@ -914,10 +977,12 @@ class SetupActivity : AppCompatActivity() {
                 view.setText("")
                 binding.blockBillInfor.txtMonney.setText("VNĐ")
                 binding.blockBillDetail.txtProperty.setText("Hàng hóa")
+                binding.blockBillDetail.edtPriceUnit.text = ""
             } else if (view is ViewGroup) {
                 cleanEdtInputData(view)
             }
         }
+
     }
 
     private fun navigateToSetupActivity() {

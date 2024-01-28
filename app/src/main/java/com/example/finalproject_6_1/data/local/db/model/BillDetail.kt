@@ -9,13 +9,6 @@ import androidx.room.PrimaryKey
 
 data class BillDetail(
 
-
-//    @ColumnInfo(name = "group_user")
-//    var groupUser: String?,
-//
-//    @ColumnInfo(name = "group")
-//    var group: Long?,
-
     @ColumnInfo(name = "property")
     var property: String?,
 

@@ -4,27 +4,20 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.finalproject_6_1.data.local.db.dao.BillDetailDao
-import com.example.finalproject_6_1.data.local.db.dao.BillInfoDao
-import com.example.finalproject_6_1.data.local.db.dao.CustomerInfoDao
-import com.example.finalproject_6_1.data.local.db.dao.QrCodeInfoDao
-import com.example.finalproject_6_1.data.local.db.model.BillDetail
-import com.example.finalproject_6_1.data.local.db.model.BillInfo
-import com.example.finalproject_6_1.data.local.db.model.CustomerInfo
-import com.example.finalproject_6_1.data.local.db.model.QrCodeInfo
+import com.example.finalproject_6_1.data.local.db.dao.*
+import com.example.finalproject_6_1.data.local.db.model.*
 
-@Database(entities = [
-    CustomerInfo::class, BillDetail::class, BillInfo::class,
-    QrCodeInfo::class,], version = 1, exportSchema = false)
+@Database(entities = [InvoiceInfoModel::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
+        private val LOCK =Any()
 
-        fun getDatabase(context: Context): AppDatabase {
-            return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
+        operator fun invoke(context: Context) = INSTANCE ?: synchronized(LOCK) {
+            INSTANCE ?: buildDatabase(context).also {
+                INSTANCE = it
             }
         }
 
@@ -37,10 +30,11 @@ abstract class AppDatabase : RoomDatabase() {
         }
     }
 
-    abstract fun billInfoDao(): BillInfoDao
-    abstract fun customerInfoDao(): CustomerInfoDao
-    abstract fun billDetailDao(): BillDetailDao
-    abstract fun qrCodeInfoDao(): QrCodeInfoDao
+//    abstract fun billInfoDao(): BillInfoDao
+//    abstract fun customerInfoDao(): CustomerInfoDao
+//    abstract fun billDetailDao(): BillDetailDao
+//    abstract fun qrCodeInfoDao(): QrCodeInfoDao
+    abstract fun invoiceInfoDao(): InvoiceInfoDao
 
 
 
