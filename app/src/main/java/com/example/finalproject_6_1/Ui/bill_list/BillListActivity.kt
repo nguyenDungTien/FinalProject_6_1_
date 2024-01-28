@@ -1,8 +1,11 @@
 package com.example.finalproject_6_1.Ui.bill_list
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.finalproject_6_1.Ui.adapter.BillListAdapter
 import com.example.finalproject_6_1.Ui.setup.BillListModel
@@ -29,11 +32,6 @@ class BillListActivity : AppCompatActivity() {
     }
 
     private fun initUI() {
-//        customerInfoList = AppDatabase.invoke(this@BillListActivity).customerInfoDao().getAllCustomerInfo()
-//        billInfoList = AppDatabase.invoke(this@BillListActivity).billInfoDao().getAllBillInfo()
-//        billDetailList = AppDatabase.invoke(this@BillListActivity).billDetailDao().getAllBillDetails()
-//        qrCodeInfoList = AppDatabase.invoke(this@BillListActivity).qrCodeInfoDao().getAllQrCode()
-//        listBill = combineData(customerInfoList, billInfoList, billDetailList, qrCodeInfoList)
         listBill = AppDatabase(this@BillListActivity).invoiceInfoDao().getAllInvoiceInfo() as ArrayList<InvoiceInfoModel>
         billListAdapter = BillListAdapter(listBill,object :ItemBillList{
             override fun item(invoiceInfoModel: InvoiceInfoModel, status: String) {
@@ -55,25 +53,38 @@ class BillListActivity : AppCompatActivity() {
     }
 
     private fun fixBill(invoiceInfoModel: InvoiceInfoModel) {
+        val intent = Intent(this@BillListActivity, SetupActivity::class.java)
+        val updateData = true
 
+        // Đính kèm đối tượng InvoiceInfoModel vào Intent
+        intent.putExtra("invoiceInfoModel", invoiceInfoModel)
+        intent.putExtra("updateData", true)
+
+        startActivity(intent)
     }
     private fun deleteBill(invoiceInfoModel: InvoiceInfoModel) {
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle("Bạn có muốn xóa hóa đơn không?")
+            .setMessage("Xóa ${invoiceInfoModel.typeTicket}")
+            .setPositiveButton("Có") { _, _ ->
+                val database = AppDatabase(this@BillListActivity)
+                database.invoiceInfoDao().deleteInvoiceInfo(invoiceInfoModel)
 
+                Toast.makeText(this@BillListActivity, "Xóa thành công", Toast.LENGTH_SHORT).show()
+
+                if (!isDestroyed) {
+                    listBill.remove(invoiceInfoModel)
+                    billListAdapter.notifyItemRemoved(listBill.indexOf(invoiceInfoModel))
+                }
+            }
+            .setNegativeButton("Không") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+
+        alertDialog.show()
     }
 
-
-//    private fun combineData(customerInfoList: List<CustomerInfo>, billInfoList: List<BillInfo>, billDetailList: List<BillDetail>, qrCodeInfoList: List<QrCodeInfo>): ArrayList<BillListModel>  {
-//        for (i in customerInfoList.indices) {
-//            val customerInfo = customerInfoList[i]
-//            val billInfo = billInfoList[i]
-//            val billDetail = billDetailList[i]
-//            val qrCodeInfo = qrCodeInfoList[i]
-//
-//            val billListModel = BillListModel(customerInfo, billInfo, qrCodeInfo, billDetail)
-//            listBill.add(billListModel)
-//        }
-//        return listBill
-//    }
 
     private fun listener() {
         binding.btnCreateTemplate.setOnClickListener {

@@ -76,10 +76,72 @@ class SetupActivity : AppCompatActivity() {
         binding = FragmentSetupInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initUi()
-        onClick()
         listenInputValue()
         isDisableViewInfoUser(true)
         isDisableViewQrCode(true)
+        val updateData = intent.getBooleanExtra("updateData", false)
+        val invoiceInfoModel = intent.getSerializableExtra("invoiceInfoModel") as? InvoiceInfoModel
+        if (updateData) {
+            if (invoiceInfoModel != null) {
+                updateDataInvoice(invoiceInfoModel)
+            }
+        }
+        onClick(updateData)
+
+
+
+    }
+
+    private fun updateDataInvoice(invoiceInfoModel:InvoiceInfoModel) {
+
+        binding.apply {
+            binding.blockBillInfor.edtNameCompany.setText(invoiceInfoModel.nameCompany)
+            binding.blockBillInfor.txtAddress.setText(invoiceInfoModel.addressCompany)
+            binding.blockBillInfor.txtPayments.text = invoiceInfoModel.paymentType
+            binding.blockBillInfor.txtMonney.setText(invoiceInfoModel.moneyType)
+            binding.blockBillInfor.txtDate.setText(invoiceInfoModel.date)
+
+            if (invoiceInfoModel.buyNotReceiver==false){
+                isDisableViewInfoUser(false)
+                binding.blockInfoUser.cbGetBill.isChecked=false
+                binding.blockInfoUser.edtBuyer.setText(invoiceInfoModel.name)
+                binding.blockInfoUser.edtAddress.setText(invoiceInfoModel.address)
+                binding.blockInfoUser.edtUnitName.setText(invoiceInfoModel.legalName)
+                binding.blockInfoUser.edtPhoneNumber.setText(invoiceInfoModel.phoneNumber)
+                binding.blockInfoUser.edtEmail.setText(invoiceInfoModel.email)
+            }else{
+                isDisableViewInfoUser(true)
+                binding.blockInfoUser.cbGetBill.isChecked=true
+                binding.blockInfoUser.edtBuyer.setText("")
+                binding.blockInfoUser.edtAddress.setText("")
+                binding.blockInfoUser.edtUnitName.setText("")
+                binding.blockInfoUser.edtPhoneNumber.setText("")
+                binding.blockInfoUser.edtEmail.setText("")
+            }
+            binding.blockBillDetail.txtProperty.setText(invoiceInfoModel.property)
+            binding.blockBillDetail.edtMerchandise.setText(invoiceInfoModel.merchandise)
+            binding.blockBillDetail.edtTypeTicket.setText(invoiceInfoModel.typeTicket)
+            binding.blockBillDetail.edtCalcUnit.setText(invoiceInfoModel.calcUnit)
+            binding.blockBillDetail.edtMoneyAfterTax.setText(invoiceInfoModel.totalMoneyAfterTax)
+            binding.blockBillDetail.edtPercentTax.setText(invoiceInfoModel.tax)
+            binding.blockBillDetail.edtAmount.setText(invoiceInfoModel.quantityPerPrint)
+            binding.blockBillDetail.edtPriceUnit.setText(invoiceInfoModel.priceUnit)
+            binding.blockBillDetail.edtTaxMoney.setText(invoiceInfoModel.taxMoney)
+
+            if (invoiceInfoModel.isCreate==true){
+                isDisableViewQrCode(false)
+                binding.blockQrCode.cbCreateQr.isChecked=true
+                binding.blockQrCode.edtTimeScan.setText(invoiceInfoModel.totalQrcode)
+                binding.blockQrCode.txtStartTimeV1.text = UtilDate.setUpDateFromCalendar(calendarStartTimeQR!!, ::setDate, ::setTime)
+            }else{
+                isDisableViewQrCode(true)
+                binding.blockQrCode.cbCreateQr.isChecked=false
+                binding.blockQrCode.edtTimeScan.setText(invoiceInfoModel.totalQrcode)
+                binding.blockQrCode.txtStartTimeV1.text = UtilDate.setUpDateFromCalendar(calendarStartTimeQR!!, ::setDate, ::setTime)
+            }
+        }
+
+
     }
 
     private fun initUi() {
@@ -685,7 +747,7 @@ class SetupActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun onClick() {
+    private fun onClick(updateData:Boolean) {
         binding.blockInfoUser.rlBlockInfoUser.setOnClickListener {
             if (binding.blockInfoUser.llGroupInfoUser.isVisible) {
                 val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -740,7 +802,7 @@ class SetupActivity : AppCompatActivity() {
             showBottomSheet(list)
         }
         binding.btnCreateSetup.setOnClickListener {
-            createSetup()
+            createSetup(updateData)
         }
         binding.btnBack.setOnClickListener {
             showUnsavedDataAlertDialog()
@@ -816,6 +878,8 @@ class SetupActivity : AppCompatActivity() {
         }
     }
 
+
+
     private fun showDeleteDataAlertDialog() {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Xác nhận xóa dữ liệu")
@@ -847,15 +911,15 @@ class SetupActivity : AppCompatActivity() {
         alertDialog.show()
     }
 
-    private fun createSetup() {
+    private fun createSetup(updateData: Boolean) {
         binding.apply {
             val typeTicket = binding.blockBillDetail.edtTypeTicket.text.toString()
             val existingTypeTicket = AppDatabase(this@SetupActivity).invoiceInfoDao().isTypeTicketExists(typeTicket)
 
-            if (existingTypeTicket) {
+            if (existingTypeTicket&&!updateData) {
                 // Show a toast message indicating that the typeTicket already exists
                 Toast.makeText(this@SetupActivity, "TypeTicket already exists", Toast.LENGTH_SHORT).show()
-            } else {
+            } else if (!existingTypeTicket&&!updateData) {
 
                 val buyerNotGetTicket = if (binding.blockInfoUser.cbGetBill.isChecked) {
                     1
@@ -946,8 +1010,63 @@ class SetupActivity : AppCompatActivity() {
                 )
                 AppDatabase(this@SetupActivity).invoiceInfoDao().insertInvoiceInfo(invoiceInfoModel)
 
-                // Optionally, show a success message
                 showSuccessDialog()
+            }else if(existingTypeTicket && updateData){
+                val invoiceInfoModelUpdate = intent.getSerializableExtra("invoiceInfoModel") as? InvoiceInfoModel
+                if (invoiceInfoModelUpdate != null) {
+                    val buyerNotGetTicket = if (binding.blockInfoUser.cbGetBill.isChecked) {
+                        1
+                    } else {
+                        0
+                    }
+                    if (buyerNotGetTicket == 1) {
+                        invoiceInfoModelUpdate.buyNotReceiver = true
+                        invoiceInfoModelUpdate.name = ""
+                        invoiceInfoModelUpdate.address = ""
+                        invoiceInfoModelUpdate.legalName = ""
+                        invoiceInfoModelUpdate.phoneNumber = ""
+                        invoiceInfoModelUpdate.email = ""
+                    } else {
+                        invoiceInfoModelUpdate.buyNotReceiver = false
+                        invoiceInfoModelUpdate.name = binding.blockInfoUser.edtBuyer.text.toString()
+                        invoiceInfoModelUpdate.address = binding.blockInfoUser.edtAddress.text.toString()
+                        invoiceInfoModelUpdate.legalName = binding.blockInfoUser.edtUnitName.text.toString()
+                        invoiceInfoModelUpdate.phoneNumber = binding.blockInfoUser.edtPhoneNumber.text.toString()
+                        invoiceInfoModelUpdate.email = binding.blockInfoUser.edtEmail.text.toString()
+                    }
+                        invoiceInfoModelUpdate.nameCompany = binding.blockBillInfor.edtNameCompany.text.toString()
+                        invoiceInfoModelUpdate.addressCompany = binding.blockBillInfor.txtAddress.text.toString()
+                        invoiceInfoModelUpdate.paymentType = binding.blockBillInfor.txtPayments.text.toString()
+                        invoiceInfoModelUpdate.moneyType = binding.blockBillInfor.txtMonney.text.toString()
+                        invoiceInfoModelUpdate.date = binding.blockBillInfor.txtDate.text.toString()
+                    val hasQRCode = if (isDisQrCode) 0 else 1
+                    if (hasQRCode == 1) {
+                        invoiceInfoModelUpdate.isCreate = true
+                        invoiceInfoModelUpdate.totalQrcode = binding.blockQrCode.edtTimeScan.text.toString().trim()
+                        invoiceInfoModelUpdate.startDateQrcode = UtilDate.convertDateTimeToString(calendarStartTimeQR!!.time, UtilDate.TIME_ISO_8601)
+                        invoiceInfoModelUpdate.endDateQrcode = UtilDate.convertDateTimeToString(calendarExpiryDateQR!!.time, UtilDate.TIME_ISO_8601)
+                    } else {
+                        invoiceInfoModelUpdate.isCreate = false
+                        invoiceInfoModelUpdate.totalQrcode = ""
+                        invoiceInfoModelUpdate.startDateQrcode = ""
+                        invoiceInfoModelUpdate.endDateQrcode = ""
+                    }
+
+                    invoiceInfoModelUpdate.property = binding.blockBillDetail.txtProperty.text.toString()
+                    invoiceInfoModelUpdate.merchandise = binding.blockBillDetail.edtMerchandise.text.toString()
+                    invoiceInfoModelUpdate.calcUnit = binding.blockBillDetail.edtCalcUnit.text.toString()
+                    invoiceInfoModelUpdate.amount = binding.blockBillDetail.edtAmount.text.toString()
+                    invoiceInfoModelUpdate.priceUnit = binding.blockBillDetail.edtPriceUnit.text.toString()
+                    invoiceInfoModelUpdate.tax = binding.blockBillDetail.edtPercentTax.text.toString()
+                    invoiceInfoModelUpdate.taxMoney = binding.blockBillDetail.edtTaxMoney.text.toString()
+                    invoiceInfoModelUpdate.totalMoneyAfterTax = binding.blockBillDetail.edtMoneyAfterTax.text.toString()
+                    invoiceInfoModelUpdate.quantityPerPrint = binding.blockBillDetail.edtAmount.text.toString()
+
+                    AppDatabase(this@SetupActivity).invoiceInfoDao().insertInvoiceInfo(invoiceInfoModelUpdate)
+                }
+
+                showSuccessDialog()
+
             }
 
         }
